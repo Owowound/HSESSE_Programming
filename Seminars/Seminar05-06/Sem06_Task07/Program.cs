@@ -8,24 +8,25 @@ namespace Sem06_Task07
         {
             double ans = 0;
 
-            for (int k = 0; k <= n; k++)
+            for (int k = 1; k <= n; k++)
             {
-                ans = ans + Math.Abs(x - k) * (Math.Cos(Math.Cbrt(k) * x / 2));
+                ans = ans + Math.Abs(x - k) * Math.Cos(Math.Cbrt(k) * x / 2d);
             }
             return ans;
         }
         static void Main(string[] args)
         {
-            string ss = "Y";
-            while (ss != "N") 
+            bool key = false;
+            while (!key) 
             {
                 int n;
-                double ans = 0, x;
+                double x;
                 string s1, s2;
                 Console.WriteLine($"Введите x:");
                 s1 = Console.ReadLine();
                 Console.WriteLine($"Введите n:");
                 s2 = Console.ReadLine();
+
                 if (double.TryParse(s1, out double t) && int.TryParse(s2, out int y))
                 {
                     x = double.Parse(s1);
@@ -42,13 +43,16 @@ namespace Sem06_Task07
                     goto m1;
                 }
 
-                double f = F(n, x) * (double)((double)Math.Log10(x) - 2 / 9);
+                double f = F(n, x) * (Math.Log(x) - 2d / 9d);
 
-                Console.WriteLine($"Ваш ответ равен {f}");
+                Console.WriteLine($"Ваш ответ равен {f:0.###}");
 
             m1:;
-                Console.WriteLine($"Продолжим?(Y/N)");
-                ss = Console.ReadLine();
+                Console.WriteLine($"Продолжим? \nВведите Esc, чтобы завершить");
+
+                key = Console.ReadKey().Key == ConsoleKey.Escape;
+
+                Console.WriteLine(key);
             } 
         }
     }
